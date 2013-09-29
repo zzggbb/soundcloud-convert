@@ -1,15 +1,22 @@
 import web
+import info
 
 urls = (
-  '/', 'index'
+  '/swag', 'Index'
 )
 
 app = web.application(urls, globals())
 
-class index:
-    def GET(self):
-        greeting = "Hello World"
-        return greeting
+render = web.template.render('templates/')
+
+class Index(object):
+	def GET(self):
+		form = web.input(url=None)
+		if form.url is not None:
+			response = info.get_song(form.url)
+			return render.index(response = response)
+		else:
+			return render.error()
 
 if __name__ == "__main__":
-    app.run()
+	app.run()

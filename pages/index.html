@@ -1,25 +1,36 @@
-$def with (response)
-<table>
-	<tr>
-		<td><b>Soundcloud track ID: </b></td>
-		<td>$response['id']</td>
-	</tr>
-	<tr>
-		<td><b>Title: </b></td>
-		<td>$response['title']</td>
-	</tr>
-	<tr>
-		<td><b>Artist: </b></td>
-		<td>$response['artist']</td>
-	</tr>
-	<tr>
-		<td><b>Length: </b></td>
-		<td>$response['length']</td>
-	</tr>
-	<tr>
-		<td><b>Download URL: </b></td>
-		<td><a href=$response['stream_url']>...</a></td>
-	</tr>
-</table>
+$def with (response, swag)
 
-<img src="http://developers.soundcloud.com/assets/powered_by_black.png" alt="soundcloud">
+<!doctype html>
+<html>
+	<head>
+		<link rel="icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/47-32.png">
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td><b>Soundcloud track ID: </b></td>
+				<td>$response['id']</td>
+			</tr>
+			<tr>
+				<td><b>Title: </b></td>
+				<td>$response['title']</td>
+			</tr>
+			<tr>
+				<td><b>Artist: </b></td>
+				<td>$response['artist']</td>
+			</tr>
+			<tr>
+				<td><b>Length: </b></td>
+				<td>$response['length']</td>
+			</tr>
+			<tr>
+				<td><b>Download URL: </b></td>
+				<td><a href=$response['stream_url']>...</a></td>
+			</tr>
+		</table>
+
+		<img src="http://developers.soundcloud.com/assets/powered_by_black.png" alt="soundcloud">
+		<br>
+		<img src=$swag width="500" height="100">
+	</body>
+</html>

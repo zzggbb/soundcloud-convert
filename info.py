@@ -4,13 +4,13 @@ import json
 
 with open('client.ini') as f:
 	client_info = json.load(f)
+
 CLIENT_ID = client_info['client_id']
 CLIENT_SECRET = client_info['client_secret']
 client = soundcloud.Client(client_id=CLIENT_ID)
 
 def get_song(track_url):
 	url = track_url
-
 	r = requests.get('http://api.soundcloud.com/resolve.json?url=%s&client_id=%s' % (url, CLIENT_ID))
 
 	# general information

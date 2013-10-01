@@ -11,6 +11,6 @@ To use host this yourself:
 
 * rename `client.example` to `client.ini` and fill it in with the `id` and `secret` information
 
-* cd `soundcloud-convert`
+* `cd soundcloud-convert`
 
 * `python app.py`

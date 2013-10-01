@@ -13,4 +13,4 @@ To use host this yourself:
 
 * cd `soundcloud-convert`
 
-* python app.py
+* `python app.py`

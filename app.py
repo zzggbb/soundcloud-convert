@@ -13,7 +13,7 @@ class Index(object):
 	def POST(self):
 		form = web.input(url=None)
 		if form.url is not None:
-			response = info.song(form.url)
+			response = info.info(form.url)
 			if not response:
 				return render.error()
 			else:

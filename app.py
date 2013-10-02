@@ -8,14 +8,14 @@ render = web.template.render('pages/')
 
 class Index(object):
 	def GET(self):
-		return render.index()
+		return render.index(state = True)
 
 	def POST(self):
 		form = web.input(url=None)
 		if form.url is not None:
 			response = info.info(form.url)
 			if not response:
-				return render.error()
+				return render.index(state = False)
 			else:
 				return render.response(response = response)
 

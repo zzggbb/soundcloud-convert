@@ -5,23 +5,26 @@ import json
 with open('client.ini') as f:
 	client_info = json.load(f)
 
-CLIENT_ID = client_info['client_id']
-CLIENT_SECRET = client_info['client_secret']
-CLIENT = soundcloud.Client(client_id=CLIENT_ID)
+CLIENT = soundcloud.Client(client_id=client_info['id'])
 
-def info(input_url):
+def resolve(url):
+	x = 'http://api.soundcloud.com/resolve.json?url={0}&client_id={1}'.format(url,client_info['id'])
+	return {'json': requests.get(x).json(), 'response_url': x}
+
+def info(url):
+
 	try:
-		check = requests.get('http://api.soundcloud.com/resolve.json?url=%s&client_id=%s' % (input_url, CLIENT_ID)).json()
+		if resolve(url)['json']['kind'] == 'track':
+			track = resolve(url)['json']
+			return [[{'id': str(track['id']),'title': track['title'],'artist': track['user']['username'],'stream_url': CLIENT.get(track['stream_url'], allow_redirects=False).location, 'raw_url': resolve(url)['response_url']}], 'Song' ]
 
-		if check['kind'] == 'track':
-			track = CLIENT.get('/tracks/' + str(check['id']))
-			return [{'id':str(track.id),'title': track.title,'artist': track.user['username'],'url': CLIENT.get(track.stream_url, allow_redirects=False).location}]
+		elif resolve(url)['json']['kind'] == 'playlist':
+			playlist = resolve(url)['json']
+			return [[({'id': str(track['id']),'title': track['title'],'artist': track['user']['username'],'stream_url': CLIENT.get(track['stream_url'], allow_redirects=False).location, 'raw_url': resolve(url)['response_url']}) for track in playlist['tracks']], 'Set']
 
-		elif check['kind'] == 'playlist':
-			playlist = CLIENT.get('/playlists/' + str(check['id']))
-			return [({'id': str(track['id']),'title': track['title'],'artist': track['user']['username'],'url': CLIENT.get(track['stream_url'], allow_redirects=False).location}) for track in playlist.tracks]
-
-		return False
+		elif (resolve(url)['json'])['kind'] == 'user':
+			favorites = requests.get('http://api.soundcloud.com/users/{0}/favorites.json?client_id={1}'.format( resolve(url)['json']['id'], client_info['id'] )).json()
+			return [[({'id': str(track['id']),'title': track['title'],'artist': track['user']['username'],'stream_url': CLIENT.get(track['stream_url'], allow_redirects=False).location, 'raw_url': resolve(url)['response_url']}) for track in favorites], 'User']
 
 	except KeyError:
 		return False

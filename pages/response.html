@@ -5,9 +5,10 @@ $def with (response)
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <link rel="icon" type="image/png" href="http://i.imgur.com/2Eorloi.png">
-    $if len(response) > 1: <title>Set Conversion</title>
-    $else: <title>$response[0]['title']</title>
+    <link rel="icon" type="image/png" href="http://i.imgur.com/FWe0n6S.png">
+
+    <title>$response[1] Conversion</title>
+
   </head>
   <body>
     <a href="https://github.com/Hifiboombox/soundcloud-convert"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
@@ -18,18 +19,14 @@ $def with (response)
         <div class="hero-unit"></div>
       </div>
     </div>
-    <div class="row-fluid">
-      <div class="span8 offset2">
-        <div class="hero-unit-blue getcenter">
-          <h3>Soundcloud Converter</h3>
-        </div>
-      </div>
-    </div>
-    $for i in response:
+    <div class="row-fluid"><div class="span8 offset2"><div class="hero-unit-blue getcenter"><h3>Soundcloud Converter</h3></div></div></div>
+    <div class="row-fluid"><div class="span2 offset5"><div class="hero-unit-blue getcenter"><a href="http://zgb.dnsd.me:8080/convert"><img src="http://i.imgur.com/DGL51MH.png"></a></div></div></div>
+
+    $for i in response[0]:
       <div class="row-fluid"><div class="span8 offset2"><div class="hero-unit-blue"><table class="aligner">
-        <tr><td>Title:</td><td>$i['title']</td></tr><tr><td>Artist:</td><td>$i['artist']</td></tr>
-        <tr><td>Download:</td><td><a href=$i['url'] download="$i['title'] .mp3"><img src="http://i.imgur.com/vXnsQ0V.png"></a></td></tr>
-        <tr><td>Track ID:</td><td>$i['id']</td></tr>
-      </table></div></div></div>
+        <tr><td>Title:</td><td>$i['title']</td></tr><tr><td>Artist:</td><td>$i['artist']</td></tr><tr><td>Download:</td>
+        <td><a href=$i['stream_url'] download="$i['title'] .mp3">...</a></td></tr>
+        <tr><td>JSON:</td><td><a href=$i['raw_url']>...</a></td></tr></table></div></div></div>
+
   </body>
 </html>

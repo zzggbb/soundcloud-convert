@@ -5,9 +5,11 @@ $def with (state)
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="http://i.imgur.com/2Eorloi.png">
+    <link rel="icon" type="image/png" href="http://i.imgur.com/FWe0n6S.png">
+
     $if state: <title>Soundcloud Converter</title>
     $else: <title>Uh Oh!</title>
+
   </head>
   <body>
     <a href="https://github.com/Hifiboombox/soundcloud-convert"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
@@ -18,15 +20,11 @@ $def with (state)
         <div class="hero-unit"></div>
       </div>
     </div>
-    <div class="row-fluid">
-      <div class="span8 offset2">
-        <div class="hero-unit-blue">
-          <h3>Soundcloud Converter</h3>
-        </div>
-      </div>
-    </div>
+    <div class="row-fluid"><div class="span8 offset2"><div class="hero-unit-blue"><h3>Soundcloud Converter</h3></div></div></div>
+
     $if state: <form action="/convert" method="POST"><input type="text" name="url"><br/><input type="submit" value="Convert"></form>
-    $else: <h2>Uh Oh!</h2>The provided song URL is invalid<br>
+    $else: <div class="row-fluid"><div class="span2 offset5"><div class="hero-unit-blue"><a href="http://zgb.dnsd.me:8080/convert"><img src="http://i.imgur.com/DGL51MH.png"></a></div></div></div><h2>Uh Oh!</h2>The provided URL is invalid<br>
     <a href="http://developers.soundcloud.com/"><img src="http://developers.soundcloud.com/assets/powered_by_large_black.png"></a>
+
   </body>
 </html>

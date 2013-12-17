@@ -1,5 +1,6 @@
 import web
 import info
+import info2
 
 URLS = ('/convert', 'Index')
 
@@ -13,7 +14,7 @@ class Index(object):
 	def POST(self):
 		form = web.input(url=None)
 		if form.url is not None:
-			response = info.info(form.url)
+			response = info2.info(form.url)
 			if not response:
 				return render.index(state = False)
 			else:

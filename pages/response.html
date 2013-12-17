@@ -7,7 +7,7 @@ $def with (response)
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <link rel="icon" type="image/png" href="http://i.imgur.com/FWe0n6S.png">
 
-    <title>$response[1] Conversion</title>
+    <title>$response[1] conversion</title>
 
   </head>
   <body>
@@ -24,9 +24,11 @@ $def with (response)
 
     $for i in response[0]:
       <div class="row-fluid"><div class="span8 offset2"><div class="hero-unit-blue"><table class="aligner">
-        <tr><td>Title:</td><td>$i['title']</td></tr><tr><td>Artist:</td><td>$i['artist']</td></tr><tr><td>Download:</td>
-        <td><a href=$i['stream_url'] download="$i['title'] .mp3">...</a></td></tr>
-        <tr><td>JSON:</td><td><a href=$i['raw_url']>...</a></td></tr></table></div></div></div>
-
+        <tr><td>Title:</td><td>$i.title</td></tr
+        ><tr><td>Artist:</td><td>$i.artist</td></tr>
+        $if i.stream[0]:
+            <tr><td>Download:</td><td><a href=$i.stream[1]>...</a></td></tr>
+        $else:
+            <tr><td>Download:</td><td>$i.stream[1]</td></tr><br>
   </body>
 </html>
